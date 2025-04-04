@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import './header.css'
 import { useEffect } from 'react';
-function Header({userData}){
+function Header({userData,onLogout}){
 
     // useEffect(
     //   ()=>{
@@ -40,8 +40,12 @@ function Header({userData}){
                 <li className="nav-item">
                 <Link className="text-white nav-link" to='/products'> Products</Link>
                 </li>
+                
                 <li className="nav-item">
-                <Link className="text-white nav-link" to='/login'> login   {userData.firstName}</Link>
+                <Link className="text-white nav-link" to='/login'> login   {userData && userData.firstName}</Link>
+                </li>
+                <li className="nav-item">
+                <div className="text-white nav-link" onClick={onLogout} > logout  </div>
                 </li>
                 <li className="nav-item dropdown">
                 <a className="text-white nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,7 +65,7 @@ function Header({userData}){
                 </li>
                 <li className="nav-item">
                 <a className="text-white nav-link" aria-disabled="true">
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i className="fa-solid fa-cart-shopping"></i>
                 </a>
                 </li>
                 <li className="nav-item">

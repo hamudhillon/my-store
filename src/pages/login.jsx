@@ -5,25 +5,29 @@ function Login({loginData}){
 
     const [error, setError] = useState(null);
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
         const email=e.target.email.value
         const password=e.target.password.value
-        fetch('https://dummyjson.com/auth/login', {
+        const res =await fetch('https://dummyjson.com/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               username:email,
               password: password,
             }),
-          })
-          .then(res => res.json())
-          .then(user => loginData(user.accessToken))
-          .then(console.log);
-          
-        
+          });
+          const data =await res.json();
+          if (res.ok){
+            loginData(data.accessToken)
+            sessionStorage.setItem('token',data.accessToken)
+            sessionStorage.setItem('user',JSON.stringify(data))
+          }
+        //   .then(res => res.json())
+        //   .then(user => loginData(user.accessToken))
+        //   .then(console.log);
     }
-    console.log(user)
+    // console.log(user)
     return(
         <>
         <div className="py-5 container">

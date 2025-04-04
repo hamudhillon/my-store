@@ -8,9 +8,16 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import SignUp from './pages/signup'
 import Login from './pages/login'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 function App() {
   const [userData,setUserData]=useState(null)
+
+  useEffect(()=>{
+    if(sessionStorage.getItem('user')){
+      setUserData(JSON.parse(sessionStorage.getItem('user')))
+    }
+
+  },[])
 
   function loginData(data){
     fetch('https://dummyjson.com/user/me', {
@@ -25,10 +32,15 @@ function App() {
   .then(userData=>setUserData(userData));
   
   }
+  function handelLogout(){
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    setUserData(null)
+  }
 
   return (
    <BrowserRouter>
-      <Header  userData={userData}></Header>
+      <Header  userData={userData} onLogout={handelLogout}></Header>
       <Routes>
         <Route path="/" element={<Home userData={userData}/>} />
         <Route path="/products" element={<Products/>} />
