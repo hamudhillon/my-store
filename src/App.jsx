@@ -8,7 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import SignUp from './pages/signup'
 import Login from './pages/login'
+import CartPage from './pages/cartpage'
 import { useEffect, useState } from 'react'
+import {CartProvider} from './context/CartContext'
 function App() {
   const [userData,setUserData]=useState(null)
 
@@ -39,16 +41,18 @@ function App() {
   }
 
   return (
-   <BrowserRouter>
-      <Header  userData={userData} onLogout={handelLogout}></Header>
-      <Routes>
-        <Route path="/" element={<Home userData={userData}/>} />
-        <Route path="/products" element={<Products/>} />
-        <Route path="/signup" element={<SignUp/>} />
-        <Route path="/login" element={<Login loginData={loginData} />} />
-      </Routes>
-    
-   </BrowserRouter>
+    <CartProvider userData={userData}>
+    <BrowserRouter>
+        <Header  userData={userData} onLogout={handelLogout}></Header>
+        <Routes>
+          <Route path="/" element={<Home userData={userData}/>} />
+          <Route path="/products" element={<Products/>} />
+          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/cart" element={<CartPage/>} />
+          <Route path="/login" element={<Login loginData={loginData} />} />
+        </Routes>
+    </BrowserRouter>
+   </CartProvider>
   )
 }
 

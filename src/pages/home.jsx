@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import ProductCards from "../components/product-cards";
+import { useCart } from "../context/CartContext";
+
 
 
 function Home({userData}){
+    const {cart,addToCart}=useCart()
     const [products,setProducts]=useState([])
     const limit=10
     useEffect(
@@ -22,7 +25,8 @@ function Home({userData}){
                 products.map((product,index)=>{
                     return(
                         <ProductCards 
-                        key={product.i} 
+                        key={product.id} 
+                        pid={product.id}
                         img={product.images[0]} 
                         title={product.title} 
                         category={product.category}

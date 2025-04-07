@@ -1,7 +1,8 @@
 import {Link} from 'react-router-dom'
 import './product-cards.css'
-function ProductCards({img,category,title,price,rating}){
-
+import { useCart } from '../context/CartContext';
+function ProductCards({pid,img,category,title,price,rating}){
+    const {addToCart}=useCart()
     return(
         <div className="card">
         <div className="card-img">
@@ -17,9 +18,9 @@ function ProductCards({img,category,title,price,rating}){
             </div>
             <div className="d-flex justify-content-between">
                     <div>
-                        <Link to='/cart'>
-                        <i className="fa-solid fa-shopping-cart"></i>
-                        </Link>
+                        {/* <Link to='/cart'> */}
+                        <i className="fa-solid fa-shopping-cart" onClick={()=>addToCart(pid,1)}></i>
+                        {/* </Link> */}
                     </div>
                     <div className="rating d-flex align-items-center gap-1">
                         <i className="fa-solid fa-star-full"></i>
