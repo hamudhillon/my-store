@@ -4,9 +4,10 @@ import { useCart } from "../context/CartContext";
 function CartPage(){
     const {cart}=useCart()
 
+   
     return (
         <h1>
-            {cart.id}
+            {cart[1].title}
         </h1>
 
     );

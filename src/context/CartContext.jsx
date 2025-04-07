@@ -10,6 +10,8 @@ const CartProvider = ({children,userData})=>{
     // if(sessionStorage.getItem('user')){
     //     setUser(JSON.parse(sessionStorage.getItem('user')).id)
     //   }
+
+    
     const addToCart = async (productId, quantity)=>{
             const resP=await fetch('https://dummyjson.com/carts/add', {
                 method: 'POST',
@@ -28,7 +30,15 @@ const CartProvider = ({children,userData})=>{
         
           const data=await resP.json()
           if(resP.ok){
-            setCart(data)
+            console.log(cart);
+            if(cart.length>0){
+              cart.push(data.products[0])
+              console.log(cart);
+            }
+            else{
+              setCart([data.products[0]])
+            }
+            // setCart(data)
           }
     };
 

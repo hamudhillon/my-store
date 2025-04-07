@@ -64,9 +64,9 @@ function Header({userData,onLogout}){
                 </a>
                 </li>
                 <li className="nav-item">
-                <a className="text-white nav-link" aria-disabled="true">
+                <Link className="text-white nav-link" to="/cart" aria-disabled="true">
                 <i className="fa-solid fa-cart-shopping"></i>
-                </a>
+                </Link>
                 </li>
                 <li className="nav-item">
                 <Link to='/signup' className="text-white nav-link" aria-disabled="true">
