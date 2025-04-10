@@ -6,7 +6,7 @@ export const useCart=()=>useContext(CartContext)
 const CartProvider = ({children,userData})=>{
     const [cart, setCart] = useState([])
     const [user, setUser]=useState(null)
-
+    const [counter,setCounter]=useState(0)
     // if(sessionStorage.getItem('user')){
     //     setUser(JSON.parse(sessionStorage.getItem('user')).id)
     //   }
@@ -31,6 +31,7 @@ const CartProvider = ({children,userData})=>{
           const data=await resP.json()
           if(resP.ok){
             console.log(cart);
+            setCounter(counter+1)
             if(cart.length>0){
               cart.push(data.products[0])
               console.log(cart);
@@ -43,7 +44,7 @@ const CartProvider = ({children,userData})=>{
     };
 
     return (
-        <CartContext.Provider value={{cart, addToCart}}>
+        <CartContext.Provider value={{cart, addToCart,counter}}>
             {children}
         </CartContext.Provider>
 

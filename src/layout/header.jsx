@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom'
 import './header.css'
 import { useEffect } from 'react';
+import { useCart } from '../context/CartContext';
 function Header({userData,onLogout}){
-
+    const {counter}=useCart()
     // useEffect(
     //   ()=>{
     //       /* providing access token in bearer */
@@ -65,6 +66,7 @@ function Header({userData,onLogout}){
                 </li>
                 <li className="nav-item">
                 <Link className="text-white nav-link" to="/cart" aria-disabled="true">
+                {counter}
                 <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
                 </li>
