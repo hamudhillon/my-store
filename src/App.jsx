@@ -17,9 +17,9 @@ function App() {
 
   useEffect(()=>{
     if(sessionStorage.getItem('user')){
-      setUserData(JSON.parse(sessionStorage.getItem('user')))
+      let udata=JSON.parse(sessionStorage.getItem('user'))
+      loginData(udata.accessToken)
     }
-
   },[])
 
   function loginData(data){

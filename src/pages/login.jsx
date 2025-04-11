@@ -22,6 +22,7 @@ function Login({loginData}){
             loginData(data.accessToken)
             sessionStorage.setItem('token',data.accessToken)
             sessionStorage.setItem('user',JSON.stringify(data))
+            
           }
         //   .then(res => res.json())
         //   .then(user => loginData(user.accessToken))
