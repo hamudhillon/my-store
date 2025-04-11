@@ -6,8 +6,21 @@ function CartPage() {
   let cartTotal=0
   console.log(cart);
   cart.forEach(element => {
-        cartTotal+=element.total
+        cartTotal+=parseFloat(element.total)
   });
+
+  function handleOrder(){
+    const order={
+      userID:1,
+      orderNumber:2345678,
+      orderDate: new Date(),
+      orderTotal:cartTotal,
+      items:cart,
+      status:'pending'
+    }
+    console.log(order)
+  }
+  
   return (
     <div className="container">
       <h1>Cart</h1>
@@ -42,9 +55,9 @@ function CartPage() {
                 <td className="text-end">Total</td>
                 <td>{cartTotal}</td>
                 <td>
-                    <Link className="btn btn-dark" to={''}>
+                    <div className="btn btn-dark" onClick={handleOrder}>
                     Checkout
-                    </Link>
+                    </div>
                 </td>
                 
             </tr>
