@@ -11,6 +11,7 @@ import Login from './pages/login'
 import CartPage from './pages/cartpage'
 import { useEffect, useState } from 'react'
 import {CartProvider} from './context/CartContext'
+import Profile from './pages/profile'
 function App() {
   const [userData,setUserData]=useState(null)
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/cart" element={<CartPage/>} />
           <Route path="/login" element={<Login loginData={loginData} />} />
+          <Route path="/profile" element={<Profile userData={userData} />} />
         </Routes>
     </BrowserRouter>
    </CartProvider>

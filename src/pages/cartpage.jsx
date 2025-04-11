@@ -6,7 +6,6 @@ function CartPage() {
   let cartTotal=0
   console.log(cart);
   cart.forEach(element => {
-
         cartTotal+=element.total
   });
   return (

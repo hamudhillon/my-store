@@ -72,6 +72,11 @@ function Header({userData,onLogout}){
                 </li>
                 <li className="nav-item">
                 <Link to='/signup' className="text-white nav-link" aria-disabled="true">
+                    <i className='fa fa-arrow-left'></i>
+                </Link>
+                </li>
+                <li className="nav-item">
+                <Link to='/profile' className="text-white nav-link" aria-disabled="true">
                     <i className='fa fa-user'></i>
                 </Link>
                 </li>

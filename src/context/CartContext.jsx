@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const CartContext=createContext()
 export const useCart=()=>useContext(CartContext)
@@ -39,6 +40,17 @@ const CartProvider = ({children,userData})=>{
             else{
               setCart([data.products[0]])
             }
+            toast.success('Add to cart', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+              });
             // setCart(data)
           }
     };
