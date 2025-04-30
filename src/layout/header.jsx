@@ -43,11 +43,18 @@ function Header({userData,onLogout}){
                 </li>
                 
                 <li className="nav-item">
-                <Link className="text-white nav-link" to='/login'> login   {userData && userData.firstName}</Link>
+                <Link className="text-white nav-link" to='/login'> login   {userData && userData.name}</Link>
                 </li>
                 <li className="nav-item">
                 <div className="text-white nav-link" onClick={onLogout} > logout  </div>
                 </li>
+                {userData && userData.role=='admin' && (
+                    <li className="nav-item">
+                    <Link className="text-white nav-link" to='/dashboard'> Dashboard </Link>
+                    </li>
+                )}
+                
+
                 <li className="nav-item dropdown">
                 <a className="text-white nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown

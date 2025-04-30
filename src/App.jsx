@@ -12,32 +12,37 @@ import CartPage from './pages/cartpage'
 import { useEffect, useState } from 'react'
 import {CartProvider} from './context/CartContext'
 import Profile from './pages/profile'
+import Dashboard from './pages/dashboard'
 function App() {
   const [userData,setUserData]=useState(null)
 
   useEffect(()=>{
+    // sessionStorage.removeItem('user');
+
+    // setUserData(null)
+
     if(sessionStorage.getItem('user')){
       let udata=JSON.parse(sessionStorage.getItem('user'))
-      loginData(udata.accessToken)
+      loginData(udata.user)
     }
   },[])
 
   function loginData(data){
-    fetch('https://dummyjson.com/user/me', {
-      method: 'GET',
-      headers: {
-      'Authorization': `Bearer ${data}`, // Pass JWT via Authorization header
-      },
-      redirect: "follow",
-      // credentials: 'include' // Include cookies (e.g., accessToken) in the request
-  })
-  .then(res => res.json())
-  .then(userData=>setUserData(userData));
-  
+  //   fetch('https://dummyjson.com/user/me', {
+  //     method: 'GET',
+  //     headers: {
+  //     'Authorization': `Bearer ${data}`, // Pass JWT via Authorization header
+  //     },
+  //     redirect: "follow",
+  //     // credentials: 'include' // Include cookies (e.g., accessToken) in the request
+  // })
+  // .then(res => res.json())
+  // .then(userData=>setUserData(userData));
+      setUserData(data)
   }
   function handelLogout(){
     sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
+    // sessionStorage.removeItem('token');
     setUserData(null)
   }
 
@@ -47,6 +52,7 @@ function App() {
         <Header  userData={userData} onLogout={handelLogout}></Header>
         <Routes>
           <Route path="/" element={<Home userData={userData}/>} />
+          <Route path="/dashboard" element={<Dashboard userData={userData}/>} />
           <Route path="/products" element={<Products/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/cart" element={<CartPage/>} />

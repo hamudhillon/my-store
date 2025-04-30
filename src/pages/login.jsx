@@ -9,19 +9,20 @@ function Login({loginData}){
         e.preventDefault()
         const email=e.target.email.value
         const password=e.target.password.value
-        const res =await fetch('https://dummyjson.com/auth/login', {
+        const res =await fetch('http://localhost:3000/api/users/login/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              username:email,
+              email:email,
               password: password,
             }),
           });
           const data =await res.json();
           if (res.ok){
-            loginData(data.accessToken)
-            sessionStorage.setItem('token',data.accessToken)
-            sessionStorage.setItem('user',JSON.stringify(data))
+            console.log(data.data)
+            loginData(data.data)
+            // sessionStorage.setItem('token',data.accessToken)
+            sessionStorage.setItem('user',JSON.stringify(data.data))
             
           }
         //   .then(res => res.json())
