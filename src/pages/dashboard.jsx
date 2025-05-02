@@ -29,24 +29,25 @@ function Dashboard({userData}) {
     
     function handleSubmit(e){
         e.preventDefault()
-        const pname=e.target.pname.value
-        const Price=e.target.Price.value
-        const desc=e.target.desc.value
-        const brand=e.target.brand.value
-        const category=e.target.category.value
+        const formData = new FormData();
+  formData.append('name', e.target.pname.value);
+  formData.append('price', e.target.Price.value);
+  formData.append('description', e.target.desc.value);
+  formData.append('brand', e.target.brand.value);
+  formData.append('category', e.target.category.value);
+  formData.append('images', image); // this field name must match multer's .single('images')
 
-        fetch('http://localhost:3000/api/products', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name:pname,
-                price:Price,
-                description:desc,
-                images:image,
-                brand:brand,
-                category:category 
-            }),
-          });
+  fetch('http://localhost:3000/api/products', {
+    method: 'POST',
+    body: formData, 
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('Product uploaded:', data);
+    })
+    .catch(err => {
+      console.error('Upload error:', err);
+    });
     }
 
     //    products.map((p)=>{
@@ -106,7 +107,7 @@ function Dashboard({userData}) {
                {p.price}
            </td>
            <td>
-               {/* <img src={p?.images} alt="" /> */}
+               <img src={`http://localhost:3000${p.images}`} className="img-fluid" alt="" />
            </td>
        </tr>
            })}
